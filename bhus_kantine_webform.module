@@ -15,7 +15,7 @@ function bhus_kantine_webform_tokens($type, $tokens, array $data = array(), arra
                    {
                        //Extract the price from text.
                        $keys = explode('|',$component['extra']['items']);
-                       $string = $keys[$count+1];
+                       $string = $keys[$value];
                        preg_match("/([0-9]*) kr/",$string, $matches);
                        $total_value += $matches[1];
                    }
