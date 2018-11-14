@@ -1,0 +1,35 @@
+<?php
+function bhus_kantine_webform_tokens($type, $tokens, array $data = array(), array $options = array()) {
+    $replacements = array();   
+   if ($type == 'submission') {   
+     foreach ($tokens as $name => $original) {     
+      switch ($name) {
+        case 'bhus_sum':
+            $total_value = 0;
+            $number_of_people = 0;
+            foreach($data['node']->webform["components"] as $key => $component)
+            {
+               if($component['type'] == "select")
+               {
+                   foreach($data['webform-submission']->data[$key] as $count => $value)
+                   {
+                       //Extract the price from text.
+                       $keys = explode('|',$component['extra']['items']);
+                       $string = $keys[$count+1];
+                       preg_match("/([0-9]*) kr/",$string, $matches);
+                       $total_value += $matches[1];
+                   }
+               }
+               elseif($component['form_key'] == "antal_deltagere")
+               {
+                   $number_of_people = $data['webform-submission']->data[$key][0];
+               }
+            }
+          $replacements[$original] = "Total: " . ($number_of_people * $total_value) . " Kr.";
+          break;
+      }
+     }
+  }
+
+  return $replacements; 
+}

@@ -1,0 +1,4 @@
+name = bhus kantine webform
+description = Tilføje sum af felter på webform til kantinen i borgerneshus.
+core = 7.x
+package = Features
