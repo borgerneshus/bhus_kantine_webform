@@ -17,7 +17,7 @@ function bhus_kantine_webform_tokens($type, $tokens, array $data = array(), arra
                        $keys = explode('|',$component['extra']['items']);
                        $string = $keys[$value];
                        preg_match("/([0-9]*) kr/",$string, $matches);
-                       $total_value += $matches[1];
+                       $total_value += (int)$matches[1];
                    }
                }
                elseif($component['form_key'] == "antal_deltagere")
