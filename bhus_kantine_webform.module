@@ -19,7 +19,7 @@ function bhus_kantine_webform_tokens($type, $tokens, array $data = array(), arra
                        $string = $keys[$value];
                        preg_match("/([0-9]*) kr/",$string, $matches);
                        $total_value += (int)$matches[1];
-                       $calc .= $matches[1];
+                       
                    }
                }
                elseif($component['form_key'] == "antal_deltagere")
@@ -27,7 +27,7 @@ function bhus_kantine_webform_tokens($type, $tokens, array $data = array(), arra
                    $number_of_people = $data['webform-submission']->data[$key][0];
                }
             }
-          $replacements[$original] = $calc . " - Total: " . ($number_of_people * $total_value) . " Kr.";
+          $replacements[$original] = "Total: " . ($number_of_people * $total_value) . " Kr.";
           break;
       }
      }
